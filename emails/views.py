@@ -1,13 +1,13 @@
-from django.core.mail import send_mail
+import logging
+
 from django.http import HttpResponse
+
+from emails.tasks import send_email_to_single_user
+
+logger = logging.getLogger(__name__)
 
 
 def send_mail_view(request):
-    send_mail(
-        "Subject here",
-        "Here is the message.",
-        "from@example.com",
-        ["to@example.com"],
-        fail_silently=False,
-    )
-    return HttpResponse("Email sent")
+    logger.info("Executing send_mail_view")
+    send_email_to_single_user.delay()
+    return HttpResponse("Email sent successfully")

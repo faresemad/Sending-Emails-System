@@ -1,7 +1,7 @@
 from django.urls import path
 
-from emails.views import send_mail_view
+from emails.views import send_emails_to_all_users
 
 urlpatterns = [
-    path("send_mail/", send_mail_view),
+    path("send_mail/", send_emails_to_all_users),
 ]

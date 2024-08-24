@@ -2,12 +2,11 @@ import logging
 
 from django.http import HttpResponse
 
-from emails.tasks import send_email_to_single_user
+from emails.tasks import send_personalized_emails
 
 logger = logging.getLogger(__name__)
 
 
-def send_mail_view(request):
-    logger.info("Executing send_mail_view")
-    send_email_to_single_user.delay()
-    return HttpResponse("Email sent successfully")
+def send_emails_to_all_users(request):
+    send_personalized_emails.delay()
+    return HttpResponse("Emails are being sent in the background.")
